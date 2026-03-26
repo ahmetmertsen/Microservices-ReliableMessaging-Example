@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reservation.API", "Reservat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Payment.API", "Payment.API\Payment.API.csproj", "{CABC52BB-3240-43EA-89C7-361F18E4A7F9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ticketing.API", "Ticketing.API\Ticketing.API.csproj", "{7B366B7C-3774-402E-B729-D9F36D48AA47}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shared", "Shared\Shared.csproj", "{AD50C5D7-7869-4261-A682-7A751D8CDB8A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reservation.Outbox.Service", "Reservation.Outbox.Service\Reservation.Outbox.Service.csproj", "{E3C2986D-66A9-4BD8-9861-FDE4AC82E382}"
@@ -27,10 +25,6 @@ Global
 		{CABC52BB-3240-43EA-89C7-361F18E4A7F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CABC52BB-3240-43EA-89C7-361F18E4A7F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CABC52BB-3240-43EA-89C7-361F18E4A7F9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7B366B7C-3774-402E-B729-D9F36D48AA47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B366B7C-3774-402E-B729-D9F36D48AA47}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B366B7C-3774-402E-B729-D9F36D48AA47}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B366B7C-3774-402E-B729-D9F36D48AA47}.Release|Any CPU.Build.0 = Release|Any CPU
 		{AD50C5D7-7869-4261-A682-7A751D8CDB8A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{AD50C5D7-7869-4261-A682-7A751D8CDB8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AD50C5D7-7869-4261-A682-7A751D8CDB8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
