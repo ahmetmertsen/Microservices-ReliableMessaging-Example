@@ -1,7 +1,11 @@
+using MassTransit;
 using Microsoft.EntityFrameworkCore;
+using Quartz;
+using Reservation.API.Consumers;
 using Reservation.API.Models;
 using Reservation.API.Models.Dtos;
 using Reservation.API.Models.Entities;
+using Shared;
 using Shared.Events;
 using System.Text.Json;
 
@@ -23,6 +27,20 @@ namespace Reservation.API
             builder.Services.AddDbContext<ReservationApiDbContext>(options =>
             {
                 options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"));
+            });
+
+            builder.Services.AddMassTransit(configurator =>
+            {
+                configurator.AddConsumer<PaymentCompletedEventConsumer>();
+                configurator.AddConsumer<PaymentFailedEventConsumer>();
+
+                configurator.UsingRabbitMq((context, _configure) =>
+                {
+                    _configure.Host(builder.Configuration["RabbitMQ"]);
+
+                    _configure.ReceiveEndpoint(RabbitMQSettings.Reservation_PaymentCompletedEventQueue, e => e.ConfigureConsumer<PaymentCompletedEventConsumer>(context));
+                    _configure.ReceiveEndpoint(RabbitMQSettings.Reservation_PaymentFailedEventQueue, e => e.ConfigureConsumer<PaymentFailedEventConsumer>(context));
+                });
             });
 
             var app = builder.Build();

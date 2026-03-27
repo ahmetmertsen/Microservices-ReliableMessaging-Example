@@ -9,6 +9,7 @@ namespace Reservation.API.Models.Entities
         public long SeatNumber { get; set; }
         public string CustomerEmail { get; set; }
         public ReservationStatus ReservationStatus { get; set; }
+        public string? Reason { get; set; }
         public DateTime CreatedAt { get; set; }
 
         public Event Event { get; set; }

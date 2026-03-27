@@ -11,6 +11,7 @@ namespace Reservation.API.Models
         public DbSet<Event> Events { get; set; }
         public DbSet<ReservedSeat> ReservedSeats { get; set; }
         public DbSet<ReservationOutbox> ReservationOutboxes { get; set; }
+        public DbSet<ReservationInbox> ReservationInboxes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -23,6 +24,9 @@ namespace Reservation.API.Models
                 .IsUnique();
 
             modelBuilder.Entity<ReservationOutbox>()
+                .HasKey(r => r.IdempotentToken);
+
+            modelBuilder.Entity<ReservationInbox>()
                 .HasKey(r => r.IdempotentToken);
                 
 
