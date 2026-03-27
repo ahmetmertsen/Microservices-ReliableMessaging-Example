@@ -9,6 +9,7 @@ namespace Payment.API.Models
 
         public DbSet<Entities.Payment> Payments { get; set; }
         public DbSet<PaymentInbox> PaymentInboxes { get; set; }
+        public DbSet<PaymentOutbox> PaymentOutboxes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -22,6 +23,9 @@ namespace Payment.API.Models
 
             modelBuilder.Entity<PaymentInbox>()
                 .HasKey(i => i.IdempotentToken);
+
+            modelBuilder.Entity<PaymentOutbox>()
+                .HasKey(o => o.IdempotentToken);
 
             base.OnModelCreating(modelBuilder);
         }
