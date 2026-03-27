@@ -2,6 +2,7 @@ using MassTransit;
 using Microsoft.EntityFrameworkCore;
 using Quartz;
 using Reservation.API.Consumers;
+using Reservation.API.Jobs;
 using Reservation.API.Models;
 using Reservation.API.Models.Dtos;
 using Reservation.API.Models.Entities;
@@ -42,6 +43,21 @@ namespace Reservation.API
                     _configure.ReceiveEndpoint(RabbitMQSettings.Reservation_PaymentFailedEventQueue, e => e.ConfigureConsumer<PaymentFailedEventConsumer>(context));
                 });
             });
+
+            builder.Services.AddQuartz(configurator =>
+            {
+                JobKey jobKey = new("ReservationInboxStatusUpdateJob");
+                configurator.AddJob<ReservationInboxStatusUpdateJob>(options => options.WithIdentity(jobKey));
+
+                TriggerKey triggerKey = new("ReservationInboxStatusUpdateTrigger");
+                configurator.AddTrigger(options => options.ForJob(jobKey)
+                    .WithIdentity(triggerKey)
+                    .StartAt(DateTime.UtcNow)
+                    .WithSimpleSchedule(builder => builder.WithIntervalInSeconds(5)
+                    .RepeatForever())
+                );
+            });
+            builder.Services.AddQuartzHostedService(options => options.WaitForJobsToComplete = true);
 
             var app = builder.Build();
 

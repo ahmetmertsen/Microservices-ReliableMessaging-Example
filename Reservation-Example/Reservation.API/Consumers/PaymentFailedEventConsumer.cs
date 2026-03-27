@@ -18,6 +18,7 @@ namespace Reservation.API.Consumers
                 {
                     IdempotentToken = context.Message.IdempotentToken,
                     Processed = false,
+                    Type = nameof(PaymentFailedEvent),
                     Payload = JsonSerializer.Serialize(context.Message)
                 });
                 await contextDB.SaveChangesAsync();

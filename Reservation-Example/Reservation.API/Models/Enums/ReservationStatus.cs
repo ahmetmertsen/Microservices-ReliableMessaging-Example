@@ -3,7 +3,7 @@
     public enum ReservationStatus
     {
         Pending,
-        Confirmed,
+        Completed,
         Failed
     }
 }
